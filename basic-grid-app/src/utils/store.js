@@ -1,5 +1,4 @@
 import create from "zustand";
-import { STATUS } from "./utils";
 
 const useGridStore = create((set) => ({
   search: "",
@@ -11,7 +10,7 @@ const useGridStore = create((set) => ({
       firstName: "Admin",
       lastName: "User",
       email: "support@cixsoft.com",
-      status: STATUS.REGISTERED,
+      status: "REGISTERED",
       createdOn: new Date(2022, 3, 14, 15, 3, 45),
     },
     {
@@ -19,7 +18,7 @@ const useGridStore = create((set) => ({
       firstName: "Meg",
       lastName: "Ray",
       email: "meg@fas.com",
-      status: STATUS.INITIATED,
+      status: "INITIATED",
       createdOn: new Date(2022, 4, 24, 15, 4, 15),
     },
     {
@@ -27,7 +26,7 @@ const useGridStore = create((set) => ({
       firstName: "Tom",
       lastName: "H",
       email: "tom@test.com",
-      status: STATUS.INITIATED,
+      status: "INITIATED",
       createdOn: new Date(2022, 4, 24, 20, 9, 45),
     },
   ],
