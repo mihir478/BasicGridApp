@@ -3,6 +3,7 @@ import { STATUS } from "./utils";
 
 const useGridStore = create((set) => ({
   search: "",
+  currentUserId: "",
   rowData: [
     {
       userId: "admin",
@@ -29,6 +30,10 @@ const useGridStore = create((set) => ({
       createdOn: new Date(2022, 4, 24, 20, 9, 45),
     },
   ],
+  setCurrentUserId: (currentUserId) =>
+    set(() => ({
+      currentUserId,
+    })),
   setSearch: (search) =>
     set(() => ({
       search,
@@ -37,12 +42,20 @@ const useGridStore = create((set) => ({
     set((state) => ({
       rowData: [...state.rowData, user],
     })),
-  deleteUser: (userId) =>
+  deleteUser: () =>
     set((state) => {
-      const index = state.rowData.findIndex((user) => user.userId === userId);
-      return {
-        rowData: [...state.rowData.slice(0, index), ...state.slice(index + 1)],
-      };
+      const index = state.rowData.findIndex(
+        (user) => user.userId === state.currentUserId
+      );
+      if (index > -1) {
+        return {
+          rowData: [
+            ...state.rowData.slice(0, index),
+            ...state.rowData.slice(index + 1),
+          ],
+        };
+      }
+      return state;
     }),
   editUser: (editedUser) =>
     set((state) => {
@@ -53,7 +66,7 @@ const useGridStore = create((set) => ({
         rowData: [
           ...state.rowData.slice(0, index),
           { ...editedUser },
-          ...state.slice(index + 1),
+          ...state.rowData.slice(index + 1),
         ],
       };
     }),

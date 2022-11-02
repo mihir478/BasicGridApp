@@ -7,7 +7,7 @@ import useGridStore from "../../utils/store";
 import "./Toolbar.css";
 
 function Toolbar() {
-  const { setSearch } = useGridStore();
+  const { setSearch, deleteUser, currentUserId } = useGridStore();
   return (
     <div className="toolbar" style={{ width: "100vw", height: "20vh" }}>
       <input
@@ -18,9 +18,11 @@ function Toolbar() {
         }}
       />
       <div className="sep" />
-      <TrashIcon className="h-12 w-12" />
+      {currentUserId !== "" ? (
+        <TrashIcon className="h-12 w-12" onClick={deleteUser} />
+      ) : null}
       <div className="sep" />
-      <PencilSquareIcon className="h-12 w-12" />
+      {currentUserId !== "" ? <PencilSquareIcon className="h-12 w-12" /> : null}
       <div className="sep" />
       <DocumentPlusIcon className="h-12 w-12" />
     </div>

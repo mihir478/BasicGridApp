@@ -15,10 +15,11 @@ import useGridStore from "../../utils/store";
 
 const Grid = () => {
   const gridRef = useRef(); // for accessing Grid's API
-  const { rowData, search } = useGridStore(); // zustand store
+  const { rowData, search, currentUserId, setCurrentUserId } = useGridStore(); // zustand store
 
   // Each Column Definition results in one Column.
   const [columnDefs] = useState([
+    { checkboxSelection: true },
     { field: "userId", headerName: "User ID" },
     { field: "firstName", headerName: "First Name" },
     { field: "lastName", headerName: "Last Name" },
@@ -36,6 +37,15 @@ const Grid = () => {
     params.api.sizeColumnsToFit();
   }, []);
 
+  const onRowSelected = useCallback(() => {
+    const selectedRows = gridRef.current.api.getSelectedRows();
+    if (selectedRows.length) {
+      setCurrentUserId(selectedRows[0].userId);
+    } else {
+      setCurrentUserId("");
+    }
+  }, [currentUserId]);
+
   useEffect(() => {
     gridRef?.current?.api?.setQuickFilter(search);
   }, [search]);
@@ -51,9 +61,11 @@ const Grid = () => {
           rowData={rowData} // Row Data for Rows
           columnDefs={columnDefs} // Column Defs for Columns
           defaultColDef={defaultColDef} // Default Column Properties
-          animateRows={true} // Optional - set to 'true' to have rows animate when sorted
-          rowSelection="multiple" // Options - allows click selection of rows
+          animateRows={false} // Optional - set to 'true' to have rows animate when sorted
+          rowSelection="single" // Options - allows click selection of a single row
+          suppressRowClickSelection={true} // Only allow checkbox selection
           onGridReady={onGridReady}
+          onRowSelected={onRowSelected}
         />
       </div>
     </div>
