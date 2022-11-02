@@ -1,0 +1,6 @@
+.ag-header-row, .ag-row, .ag-root {
+  background-color: #404D59;
+  color: #A7B5C2;
+  --ag-header-foreground-color:  #A7B5C2;
+
+}

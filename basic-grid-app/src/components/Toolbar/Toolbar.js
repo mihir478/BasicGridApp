@@ -7,8 +7,13 @@ import useGridStore from "../../utils/store";
 import "./Toolbar.css";
 
 function Toolbar({ openModal }) {
-  const { setSearch, deleteUser, currentUserId, setExistingUser } =
-    useGridStore(); // zustand store
+  const {
+    setSearch,
+    deleteUser,
+    currentUserId,
+    setExistingUser,
+    setCurrentUserId,
+  } = useGridStore(); // zustand store
   return (
     <div className="toolbar" style={{ width: "100vw", height: "20vh" }}>
       <input
@@ -20,7 +25,14 @@ function Toolbar({ openModal }) {
       />
       <div className="sep" />
       {currentUserId !== "" ? (
-        <TrashIcon className="h-12 w-12" onClick={deleteUser} />
+        <TrashIcon
+          className="h-12 w-12"
+          onClick={() => {
+            deleteUser();
+            setCurrentUserId("");
+            setExistingUser(false);
+          }}
+        />
       ) : null}
       <div className="sep" />
       {currentUserId !== "" ? (

@@ -1,18 +1,28 @@
 label {
-  margin-top: 8px;
+  color: black;
+  margin-top: 16px;
   padding: 5px;
   height: 36px;
   float: left;
+  font-weight: bold;
 }
 
 input {
   height: 36px;
-  width: 256px;
+  width: 196px;
   border: 1px solid black;
-  margin-top: 8px;
+  color: black;
+  margin-top: 16px;
   padding: 5px;
-  margin-right: 10px;
+  margin-right: 8px;
+  margin-left: 16px;
   float: right;
+}
+
+.error {
+  padding: 5px;
+  margin-top: 12px;
+  color: red;
 }
 
 .submit {
@@ -24,6 +34,10 @@ input {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-top: 8px;
+  margin-top: 16px;
   border-radius: 8px;
+}
+
+.submit:disabled {
+  background-color: gray;
 }
