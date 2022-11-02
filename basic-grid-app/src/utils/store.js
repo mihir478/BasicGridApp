@@ -4,6 +4,7 @@ import { STATUS } from "./utils";
 const useGridStore = create((set) => ({
   search: "",
   currentUserId: "",
+  existingUser: false,
   rowData: [
     {
       userId: "admin",
@@ -30,6 +31,10 @@ const useGridStore = create((set) => ({
       createdOn: new Date(2022, 4, 24, 20, 9, 45),
     },
   ],
+  setExistingUser: (existingUser) =>
+    set(() => ({
+      existingUser,
+    })),
   setCurrentUserId: (currentUserId) =>
     set(() => ({
       currentUserId,
@@ -47,15 +52,12 @@ const useGridStore = create((set) => ({
       const index = state.rowData.findIndex(
         (user) => user.userId === state.currentUserId
       );
-      if (index > -1) {
-        return {
-          rowData: [
-            ...state.rowData.slice(0, index),
-            ...state.rowData.slice(index + 1),
-          ],
-        };
-      }
-      return state;
+      return {
+        rowData: [
+          ...state.rowData.slice(0, index),
+          ...state.rowData.slice(index + 1),
+        ],
+      };
     }),
   editUser: (editedUser) =>
     set((state) => {
