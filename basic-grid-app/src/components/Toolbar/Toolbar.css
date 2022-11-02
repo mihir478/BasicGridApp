@@ -1,0 +1,22 @@
+.toolbar > * {
+  float: right;
+}
+
+svg {
+  cursor: pointer;
+}
+
+.sep {
+  border-left: 1px solid black;
+  height: 30px;
+  margin: 10px;
+}
+
+.search {
+  height: 36px;
+  width: 256px;
+  border: 1px solid black;
+  margin-top: 8px;
+  padding: 5px;
+  margin-right: 10px;
+}
